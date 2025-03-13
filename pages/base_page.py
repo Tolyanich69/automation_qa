@@ -36,7 +36,7 @@ class BasePage:
 
     def goto_element(self, element):
         """Scrolling to an element"""
-        self.driver.execute_script("argument[0].scrollIntoView();", element)
+        self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
     def remove_footer(self):
         self.driver.execute_script("document.getElementsByTagName('footer')[0].remove();")
