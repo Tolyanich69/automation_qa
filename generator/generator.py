@@ -17,3 +17,10 @@ def generated_person():
         current_address= faker_ua.address(),
         permanent_address= faker_ua.address(),
     )
+
+def generated_file():
+    path = rf"D:\pythonProject\automation_qa\file_test{random.randint(1,110)}.txt"
+    file =open(path, "w+")
+    file.write(f"Hello world {random.randint(1, 99)}")
+    file.close()
+    return file.name, path
