@@ -13,6 +13,7 @@ class BasePage:
 
     def element_is_visible(self, locator, timeout=5):
         """ Search for visible locators """
+        self.goto_element(self.element_is_present(locator))
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
     def element_are_all_visible(self, locator, timeout=5):
