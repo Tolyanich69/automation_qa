@@ -1,4 +1,4 @@
-import time
+
 
 from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage
 

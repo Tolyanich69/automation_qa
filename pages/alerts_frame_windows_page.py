@@ -1,7 +1,5 @@
 import time
 
-
-
 from locators.alerts_frame_windows_locators import BrowserWindowsPageLocators, AlertsPageLocators
 from pages.base_page import BasePage
 
