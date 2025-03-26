@@ -43,7 +43,9 @@ class BasePage:
         self.driver.execute_script("document.getElementsByTagName('footer')[0].remove();")
         self.driver.execute_script("document.getElementById('fixedban').style.display='none';")
 
-
+    def visible_is_alert(self, timeout=5):
+        wait(self.driver, timeout).until(EC.alert_is_present())
+        return self.driver.switch_to.alert
 
 
 
