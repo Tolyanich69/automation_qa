@@ -12,3 +12,7 @@ class AlertsPageLocators:
     CONFIRM_BUTTON = (By.CSS_SELECTOR, "button[id='confirmButton']")
     PROMPT_BUTTON = (By.CSS_SELECTOR, "button[id='promtButton']")
 
+    TEXT_RESULT_CONFIRM = (By.CSS_SELECTOR, "span[id='confirmResult']")
+    TEXT_RESULT_PROMPT = (By.CSS_SELECTOR, "span[id='promptResult']")
+
+

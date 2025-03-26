@@ -26,12 +26,29 @@ class TestAlertsFrameWindow:
             alert_page = AlertsPage(driver, "https://demoqa.com/alerts")
             alert_page.open()
             alert_text = alert_page.check_see_alert()
-            assert alert_text == "You clicked a button"
+            assert alert_text == "You clicked a button", "Alert did not show up"
 
         def test_alert_appear_5_sec(self, driver):
             alert_page = AlertsPage(driver, "https://demoqa.com/alerts")
             alert_page.open()
             alert_text = alert_page.check_appear_5_sec()
-            assert alert_text == "This alert appeared after 5 seconds"
+            assert alert_text == "This alert appeared after 5 seconds", "Alert did not show up"
+
+        def test_alert_confirm(self, driver):
+            alert_page = AlertsPage(driver, "https://demoqa.com/alerts")
+            alert_page.open()
+            result_text = alert_page.check_confirm_alert()
+            assert result_text == "You selected Ok", "Alert did not show up"
+
+        def test_alert_prompt_box(self, driver):
+            alert_page = AlertsPage(driver, "https://demoqa.com/alerts")
+            alert_page.open()
+            text_send = "Hello World"
+            result = alert_page.check_alert_prompt_box(text_send)
+            assert result == f"You entered {text_send}", "Alert did not show up"
+
+
+
+
 
 

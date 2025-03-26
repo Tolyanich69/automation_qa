@@ -39,6 +39,25 @@ class AlertsPage(BasePage):
         alert_window.accept()
         return text
 
+    def check_confirm_alert(self):
+        self.element_is_visible(self.locators.CONFIRM_BUTTON).click()
+        alert_window = self.visible_is_alert()
+        alert_window.accept()
+        text_result = self.element_is_present(self.locators.TEXT_RESULT_CONFIRM).text
+        return text_result
+
+    def check_alert_prompt_box(self, send_text):
+        self.element_is_visible(self.locators.PROMPT_BUTTON).click()
+        alert_window = self.visible_is_alert()
+        alert_window.send_keys(send_text)
+        alert_window.accept()
+        text_result = self.element_is_present(self.locators.TEXT_RESULT_PROMPT).text
+        return text_result
+
+
+
+
+
 
 
 
