@@ -1,6 +1,7 @@
 
 
-from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage, FramesPage, NestedFramesPage
+from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage, FramesPage, NestedFramesPage, \
+    ModalDialogPage
 
 
 class TestAlertsFrameWindow:
@@ -65,3 +66,21 @@ class TestAlertsFrameWindow:
             parent_text, child_text = nested_frames_page.check_nested_frame()
             assert parent_text == "Parent frame", "Nested frame goes not exist"
             assert child_text == "Child Iframe", "Nested frame goes not exist"
+
+    class TestModalDialogPage:
+
+        def test_small_modal_dialog(self, driver):
+            modal_dialog_page = ModalDialogPage(driver, "https://demoqa.com/modal-dialogs")
+            modal_dialog_page.open()
+            small_modal_title, small_modal_text = modal_dialog_page.check_small_modal()
+            assert small_modal_title == "Small Modal", "The header is not 'Small Modal'"
+            assert small_modal_text != "The modal window is not filled"
+
+        def test_large_modal_dialog(self, driver):
+            modal_dialog_page = ModalDialogPage(driver, "https://demoqa.com/modal-dialogs")
+            modal_dialog_page.open()
+            large_modal_title, large_modal_text = modal_dialog_page.check_large_modal()
+            assert large_modal_title == "Large Modal", "The header is not 'Large Modal'"
+            assert large_modal_text != "The modal window is not filled"
+
+
