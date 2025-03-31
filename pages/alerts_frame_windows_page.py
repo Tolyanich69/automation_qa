@@ -1,8 +1,7 @@
 import time
 
-
-
-from locators.alerts_frame_windows_locators import BrowserWindowsPageLocators, AlertsPageLocators
+from locators.alerts_frame_windows_locators import BrowserWindowsPageLocators, AlertsPageLocators, FramesPageLocators, \
+    NestedFramesPageLocators, ModalDialogPageLocators
 from pages.base_page import BasePage
 
 
@@ -54,22 +53,52 @@ class AlertsPage(BasePage):
         text_result = self.element_is_present(self.locators.TEXT_RESULT_PROMPT).text
         return text_result
 
+class FramesPage(BasePage):
+    locators = FramesPageLocators()
 
+    def check_frame(self, frame_num):
+        if frame_num == "frame1":
+            frame = self.element_is_present(self.locators.FIRST_FRAME)
+            width = frame.get_attribute("width")
+            height = frame.get_attribute("height")
+            self.driver.switch_to.frame(frame)
+            text = self.element_is_present(self.locators.TITLE_FRAME).text
+            self.driver.switch_to.default_content()
+            return [text, width, height]
+        if frame_num == "frame2":
+            frame = self.element_is_present(self.locators.SECOND_FRAME)
+            width = frame.get_attribute("width")
+            height = frame.get_attribute("height")
+            self.driver.switch_to.frame(frame)
+            text = self.element_is_present(self.locators.TITLE_FRAME).text
+            self.driver.switch_to.default_content()
+            return [text, width, height]
 
+class NestedFramesPage(BasePage):
+    locators = NestedFramesPageLocators()
 
+    def check_nested_frame(self):
+        parent_frame = self.element_is_present(self.locators.PARENT_FRAME)
+        self.driver.switch_to.frame(parent_frame)
+        parent_text = self.element_is_present(self.locators.PARENT_TEXT).text
+        child_frame = self.element_is_present(self.locators.CHILD_FRAME)
+        self.driver.switch_to.frame(child_frame)
+        child_text = self.element_is_present(self.locators.CHILD_TEXT).text
+        return parent_text, child_text
 
+class ModalDialogPage(BasePage):
+    locators = ModalDialogPageLocators()
 
+    def check_small_modal(self):
+        self.element_is_visible(self.locators.SMALL_MODAL_BUTTON).click()
+        small_modal_title = self.element_is_present(self.locators.SMALL_MODAL_TITLE).text
+        small_modal_text = self.element_is_present(self.locators.SMALL_MODAL_TEXT).text
+        self.element_is_visible(self.locators.SMALL_MODAL_CLOSE_BUTTON).click()
+        return small_modal_title, small_modal_text
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def check_large_modal(self):
+        self.element_is_visible(self.locators.LARGE_MODAL_BUTTON).click()
+        large_modal_title = self.element_is_present(self.locators.LARGE_MODAL_TITLE).text
+        large_modal_text = self.element_is_present(self.locators.LARGE_MODAL_TEXT).text
+        self.element_is_visible(self.locators.LARGE_MODAL_CLOSE_BUTTON).click()
+        return large_modal_title, large_modal_text

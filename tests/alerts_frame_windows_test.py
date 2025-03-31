@@ -1,6 +1,7 @@
-import time
 
-from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage
+
+from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage, FramesPage, NestedFramesPage, \
+    ModalDialogPage
 
 
 class TestAlertsFrameWindow:
@@ -47,8 +48,39 @@ class TestAlertsFrameWindow:
             result = alert_page.check_alert_prompt_box(text_send)
             assert result == f"You entered {text_send}", "Alert did not show up"
 
+    class TestFramesPage:
 
+        def test_frames(self, driver):
+            frame_page = FramesPage(driver, "https://demoqa.com/frames")
+            frame_page.open()
+            result_frame1 = frame_page.check_frame("frame1")
+            result_frame2 = frame_page.check_frame("frame2")
+            assert result_frame1 == ['This is a sample page', '500px', '350px'], "The frame does not exist"
+            assert result_frame2 == ['This is a sample page', '100px', '100px'], "The frame does not exist"
 
+    class TestNestedFramesPage:
 
+        def test_nested_frames(self, driver):
+            nested_frames_page = NestedFramesPage(driver, "https://demoqa.com/nestedframes")
+            nested_frames_page.open()
+            parent_text, child_text = nested_frames_page.check_nested_frame()
+            assert parent_text == "Parent frame", "Nested frame goes not exist"
+            assert child_text == "Child Iframe", "Nested frame goes not exist"
+
+    class TestModalDialogPage:
+
+        def test_small_modal_dialog(self, driver):
+            modal_dialog_page = ModalDialogPage(driver, "https://demoqa.com/modal-dialogs")
+            modal_dialog_page.open()
+            small_modal_title, small_modal_text = modal_dialog_page.check_small_modal()
+            assert small_modal_title == "Small Modal", "The header is not 'Small Modal'"
+            assert small_modal_text != "The modal window is not filled"
+
+        def test_large_modal_dialog(self, driver):
+            modal_dialog_page = ModalDialogPage(driver, "https://demoqa.com/modal-dialogs")
+            modal_dialog_page.open()
+            large_modal_title, large_modal_text = modal_dialog_page.check_large_modal()
+            assert large_modal_title == "Large Modal", "The header is not 'Large Modal'"
+            assert large_modal_text != "The modal window is not filled"
 
 
