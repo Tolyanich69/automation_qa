@@ -1,6 +1,6 @@
 import random
 
-from data.data import Person
+from data.data import Person, Color
 from faker import Faker
 
 faker_ua = Faker("uk_UA")
@@ -25,3 +25,8 @@ def generated_file():
     file.write(f"Hello world {random.randint(1, 99)}")
     file.close()
     return file.name, path
+
+def generated_color():
+    yield Color(
+        color_name = ["red", "Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo", "Magenta", "Aqua"]
+    )
