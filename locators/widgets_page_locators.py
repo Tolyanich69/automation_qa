@@ -1,3 +1,5 @@
+import random
+
 from selenium.webdriver.common.by import By
 
 
@@ -60,3 +62,13 @@ class ToolTipsPageLocators:
 
 class MenuPageLocators:
     MENU_ITEM_LIST = (By.CSS_SELECTOR, "ul[id='nav'] li a")
+
+class SelectMenuPageLocators:
+    SELECT_VALUE = (By.CSS_SELECTOR, "div[id= 'withOptGroup']")
+    SELECT_VALUE_INPUT = (By.CSS_SELECTOR, "input[id='react-select-2-input']")
+    SELECT_VALUE_TEXT = (By.CSS_SELECTOR, "div[id='withOptGroup'] div div div")
+    SELECT_ONE = (By.CSS_SELECTOR, "div[id= 'selectOne']")
+    SELECT_ONE_INPUT = (By.CSS_SELECTOR, "input[id='react-select-3-input']")
+    SELECT_ONE_TEXT = (By.CSS_SELECTOR, "div[id='selectOne'] div div div")
+    OLD_STILE = (By.CSS_SELECTOR, "select[id='oldSelectMenu'] option")
+    OLD_STILE_OPTION = (By.CSS_SELECTOR, f"option[value='{random.randint(1, 10)}']")

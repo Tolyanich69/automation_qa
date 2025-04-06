@@ -1,7 +1,7 @@
 import time
 
 from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage, \
-    ToolTipsPage, MenuPage
+    ToolTipsPage, MenuPage, SelectMenuPage
 
 
 class TestWidgets:
@@ -39,8 +39,6 @@ class TestWidgets:
             autocomplete_page.open()
             color = autocomplete_page.fill_input_single()
             color_result = autocomplete_page.check_color_in_single()
-            print(color)
-            print(color_result)
             assert color == color_result, "The added colors are missing in the input"
 
     class TestDatePickerPage:
@@ -107,3 +105,14 @@ class TestWidgets:
             data = menu_page.check_menu()
             assert data == ['Main Item 1', 'Main Item 2', 'Sub Item', 'Sub Item', 'SUB SUB LIST »', 'Sub Sub Item 1',
                             'Sub Sub Item 2', 'Main Item 3'], "Menu item do not exist, or has not been selected"
+
+    class TestSelectMenuPage:
+
+        def test_select_menu(self, driver):
+            select_menu_pege = SelectMenuPage(driver, "https://demoqa.com/select-menu")
+            select_menu_pege.open()
+            select_value_text, select_one_text, old_style_text, data = select_menu_pege.check_select_menu()
+            assert select_value_text == "Group 1, option 1", "Select option not selected or invalid"
+            assert select_one_text == "Dr.", "Select title not selected or invalid"
+            assert old_style_text in data, "The added colors are missing in the input"
+

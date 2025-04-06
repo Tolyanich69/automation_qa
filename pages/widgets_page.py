@@ -7,7 +7,8 @@ from selenium.webdriver.support.select import Select
 
 from generator.generator import generated_color, generated_date
 from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators, \
-    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators, MenuPageLocators
+    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators, MenuPageLocators, \
+    SelectMenuPageLocators
 from pages.base_page import BasePage
 
 
@@ -180,6 +181,27 @@ class MenuPage(BasePage):
             self.action_move_to_element(item)
             data.append(item.text)
         return data
+
+class SelectMenuPage(BasePage):
+    locators = SelectMenuPageLocators()
+
+    def check_select_menu(self):
+        self.element_is_visible(self.locators.SELECT_VALUE).click()
+        self.element_is_visible(self.locators.SELECT_VALUE_INPUT).send_keys(Keys.ENTER)
+        select_value_text = self.element_is_present(self.locators.SELECT_VALUE_TEXT).text
+        self.element_is_visible(self.locators.SELECT_ONE).click()
+        self.element_is_visible(self.locators.SELECT_ONE_INPUT).send_keys(Keys.ENTER)
+        select_one_text = self.element_is_present(self.locators.SELECT_ONE_TEXT).text
+        options = self.element_are_presents(self.locators.OLD_STILE)
+        data = []
+        for option in options:
+            data.append(option.text)
+        old_style = self.element_is_visible(self.locators.OLD_STILE_OPTION)
+        old_style.click()
+        old_style_text = old_style.text
+
+        return select_value_text, select_one_text, old_style_text, data
+
 
 
 
