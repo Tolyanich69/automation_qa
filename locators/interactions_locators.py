@@ -50,3 +50,17 @@ class DroppablePageLocators:
     NOT_REVERT = (By.CSS_SELECTOR, "div[id='notRevertable']")
     DROP_HERE_REVERT = (By.CSS_SELECTOR, "#revertableDropContainer #droppable")
 
+class DragabblePageLocators:
+
+    # Simple
+    SIMPLE_TAB = (By.CSS_SELECTOR, "a[id='draggableExample-tab-simple']")
+    DRAG_ME_SIMPLE = (By.CSS_SELECTOR, "#draggableExample-tabpane-simple #dragBox")
+
+    # Axis Restricted
+    AXIS_RESTRICTED_TAB = (By.CSS_SELECTOR, "a[id='draggableExample-tab-axisRestriction']")
+    ONLY_X = (By.CSS_SELECTOR, "div[id='restrictedX']")
+    ONLY_Y = (By.CSS_SELECTOR, "div[id='restrictedY']")
+
+    # Container Restricted
+    CONTAINER_RESTRICTED_TAB = (By.CSS_SELECTOR, "a[id='draggableExample-tab-containerRestriction']")
+    DRAG_WITHIN_THE_BOX = (By.CSS_SELECTOR, "div[id='containmentWrapper']  div")
